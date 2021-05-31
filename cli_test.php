@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /*
  +-------------------------------------------------------------------------+
@@ -21,6 +22,13 @@
  | http://www.cacti.net/                                                   |
  +-------------------------------------------------------------------------+
 */
-error_reporting(E_ALL);
 
-header('location: install.php');
+/* do NOT run this script through a web browser */
+if (php_sapi_name() != 'cli') {
+	die('<br><strong>This script is only meant to run at the command line.</strong>');
+}
+
+if ($argv !== false && sizeof($argv)) {
+	$value = intval($argv[1]);
+	print $value * $value;
+}
